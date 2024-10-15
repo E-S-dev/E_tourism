@@ -32,9 +32,4 @@ class Tour extends Model
         //The relation between Tour & Tourist is 1 -> n
         return $this->hasMany(Tourist::class);
     }
-
-    public function touristCount(){
-        $this->number = $this->tourists()->count();
-        $this->save();
-    }
 }

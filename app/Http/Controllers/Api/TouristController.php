@@ -32,12 +32,20 @@ class TouristController extends Controller
             return response()->json(['message' => 'Tourist not found!'], 404);
         }
 
+        if($tourist->tour_id == $tour->id){
+            return response()->json(['message' => 'You are already registerd for this Tour!'], 400);
+        }
+
         $tourist->tour_id = $tour->id;
         $tourist->save();
+
+        $tour->number += 1;
+        $tour->save();
 
         return response()->json([
             'message' => 'You have regesterd for this tour suucessfully.',
             'tourist' => $tourist,
+            'tour' => $tour,
         ],200);
     }
 }
