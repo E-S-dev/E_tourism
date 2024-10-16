@@ -21,7 +21,9 @@ return new class extends Migration
             $table->string('photo')->default('photos/default.png');
             $table->float('price');
             $table->enum('status', ['open', 'closed', 'pending'])->default('pending');
+            $table->date('date');
             $table->unsignedInteger('number')->default(0);
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }

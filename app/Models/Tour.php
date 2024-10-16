@@ -16,7 +16,9 @@ class Tour extends Model
         'photo',
         'price',
         'status',
+        'date',
         'number',
+        'description',
     ];
 
     public function guide(){

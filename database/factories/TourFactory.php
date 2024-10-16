@@ -24,7 +24,9 @@ class TourFactory extends Factory
             'guide_id' => Guide::factory(),
             'driver_id' => Driver::factory(),
             'programme_id' => Programme::factory(),
+            'date' => $this->faker->date(),
             'price' => $this->faker->randomFloat(1, 20, 30),
+            'description' => $this->faker->Paragraph(),
         ];
     }
 }
