@@ -16,6 +16,17 @@ class DriverController extends Controller
 
         return $driver->all();
     }
+    function getDriverDetails($id){
+        $driver = Driver::find($id);
+        if(!$driver){
+            return response()->json([
+                'message' => 'Driver not found!'
+            ]);
+        }
+        return response()->json([
+            'driver' => $driver
+        ]);
+    }
 
 //ADD DRIVERS FUNCTION----------------------------------------------------------------------------------
 

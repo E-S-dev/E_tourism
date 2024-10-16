@@ -16,6 +16,18 @@ class ProgrammeController extends Controller
         return $programmes->all();
     }
 
+    function getProgrammeDetails($id){
+        $programme = Programme::find($id);
+        if(!$programme){
+            return response()->json([
+                'message' => 'Programme not found!'
+            ]);
+        }
+        return response()->json([
+            'programme' => $programme
+        ]);
+    }
+
 //ADD programmeS FUNCTION----------------------------------------------------------------------------------
 
     function addProgramme(Request $request){

@@ -21,12 +21,24 @@ class TourController extends Controller
 
     }
 
-    // function getOpenTours(){
+    function getOpenTours(){
 
-    //     $tours = Tour::where('status', 'open')->get();
-    //     return $tours;
+        $tours = Tour::where('status', 'open')->get();
+        return $tours;
 
-    // }
+    }
+
+    function getTourDetails($id){
+        $tour = Tour::find($id);
+        if(!$tour){
+            return response()->json([
+                'message' => 'Tour not found!'
+            ]);
+        }
+        return response()->json([
+            'tour' => $tour
+        ]);
+    }
 
 //Add Tour Function----------------------------------------------------------------------
 

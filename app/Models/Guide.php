@@ -12,6 +12,7 @@ class Guide extends Model
     protected $fillable = [
         'fName',
         'lName',
+        'address',
         'mobile',
         'description',
     ];

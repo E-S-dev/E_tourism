@@ -17,6 +17,17 @@ class GuideController extends Controller
        return $guide->all();
     }
 
+    function getGuideDetails($id){
+        $guide = Guide::find($id);
+        if(!$guide){
+            return response()->json([
+                'message' => 'Guide not found!'
+            ]);
+        }
+        return response()->json([
+            'guide' => $guide
+        ]);
+    }
 //ADD GUIDES FUNCTION----------------------------------------------------------------------------------
 
     function addGuide(Request $request){

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('fName');
             $table->string('lName');
+            $table->string('address');
             $table->string('mobile');
             $table->longText('description')->nullable();
             $table->timestamps();

@@ -20,6 +20,7 @@ class GuideFactory extends Factory
             //generate random data with faker
             'fName' => $this->faker->FirstName($gender = 'male'|'female'),
             'lName' => $this->faker->LastName(),
+            'address' => $this->faker->address(),
             'mobile' => $this->faker->e164PhoneNumber(),
             'description' => $this->faker->Paragraph()
         ];
