@@ -36,6 +36,7 @@ Route::get('get-tour-detalis/{id}', [TourController::class, 'getTourDetails']);
 Route::get('get-guide-detalis/{id}', [GuideController::class, 'getGuideDetails']);
 Route::get('get-driver-detalis/{id}', [DriverController::class, 'getDriverDetails']);
 Route::get('get-programme-detalis/{id}', [ProgrammeController::class, 'getProgrammeDetails']);
+Route::post('search-tours', [TourController::class, 'searchTours']);
 
 
 

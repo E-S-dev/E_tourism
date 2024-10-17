@@ -172,4 +172,23 @@ class TourController extends Controller
             'message' => 'Tour Deleted Successfully!'
         ]);
     }
+
+    function searchTours(Request $request){
+
+        $searchTerm = $request->keyword;
+        if(!$searchTerm){
+            return response()->json(['message' => 'Please enter a keyword!'], 400);
+        }
+        $tours = Tour::where('description', 'like', '%' . $searchTerm . '%')->get();
+
+        if($tours->isEmpty()){
+            return response()->json([
+                'message' => 'Nothing Found!'
+            ]);
+        }
+        return response()->json([
+            'tours' => $tours
+        ],200);
+
+    }
 }
