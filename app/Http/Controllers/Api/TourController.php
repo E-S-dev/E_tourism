@@ -50,7 +50,7 @@ class TourController extends Controller
             'programme_id' => 'required|exists:programmes,id',
             'photo' => 'image|mimes:png,jpg|max:2048',
             'price' => 'required|numeric|between:0,9999.99',
-            'date' => 'required',
+            'date' => 'required|date_format:Y-m-d',
             'number' => 'required|unique:tours,number|between:0,6',
         ],[
             //messages for Errores...............................
@@ -59,6 +59,7 @@ class TourController extends Controller
             'driver_id.exists' => 'Driver not found.',
             'programme_id.exists' => 'Programme not found.',
             'number.unique' => 'Namber already exists.',
+            'date.date_format' => 'Please write the date in this format "YYYY-MM-DD.'
 
         ]);
 
@@ -104,7 +105,7 @@ class TourController extends Controller
             'programme_id' => 'required|exists:programmes,id',
             'photo' => 'image|mimes:png,jpg|max:2048',
             'price' => 'required|numeric|between:0,9999.99',
-            'date' => 'required',
+            'date' => 'required|date_format:Y-m-d',
             'number' => 'required|between:0,6',
         ],[
             //messages for Errores...............................
@@ -115,6 +116,7 @@ class TourController extends Controller
             'guide_id.exists' => 'Guide not found.',
             'driver_id.exists' => 'Driver not found.',
             'programme_id.exists' => 'Programme not found.',
+            'date.date_format' => 'Please write the date in this format "YYYY-MM-DD.'
 
         ]);
 

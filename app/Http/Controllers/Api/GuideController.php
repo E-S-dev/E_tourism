@@ -35,7 +35,7 @@ class GuideController extends Controller
         $validator = Validator::make($request ->all(),[
             'fName' => 'required|string|max:255',
             'lName' => 'required|string|max:255',
-            'address' => 'requird|string|max:255',
+            'address' => 'required|string|max:255',
             'mobile' => 'required|min:10|max:15',
         ]);
 
@@ -68,7 +68,7 @@ class GuideController extends Controller
         $validator = Validator::make($request ->all(),[
             'fName' => 'required|string|max:255',
             'lName' => 'required|string|max:255',
-            'address' => 'requird|string|max:255',
+            'address' => 'required|string|max:255',
             'mobile' => 'required|min:10|max:15',
         ]);
 
