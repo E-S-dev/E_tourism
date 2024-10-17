@@ -49,8 +49,8 @@ class ProgrammeController extends Controller
         $programme->type = $request->type;
         $programme->name = $request->name;
         $programme->description = $request->description;
-        $tour->startDate = $request->startDate;
-        $tour->endDate = $request->endDate;
+        $programme->startDate = $request->startDate;
+        $programme->endDate = $request->endDate;
 
         $programme->save();
 
@@ -85,8 +85,8 @@ class ProgrammeController extends Controller
         $programme->type = $request->type;
         $programme->name = $request->name;
         $programme->description = $request->description;
-        $tour->startDate = $request->startDate;
-        $tour->endDate = $request->endDate;
+        $programme->startDate = $request->startDate;
+        $programme->endDate = $request->endDate;
 
         $programme->save();
 
