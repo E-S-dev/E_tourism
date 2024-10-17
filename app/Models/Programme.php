@@ -13,6 +13,8 @@ class Programme extends Model
         'type',
         'name',
         'description',
+        'startDate',
+        'endDate',
     ];
 
     public function tours(){

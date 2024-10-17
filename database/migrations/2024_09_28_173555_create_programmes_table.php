@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('type');
             $table->string('name');
             $table->longText('description')->nullable();
+            $table->date('startDate');
+            $table->date('endDate');
             $table->timestamps();
         });
     }

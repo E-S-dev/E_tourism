@@ -20,7 +20,9 @@ class ProgrammeFactory extends Factory
             //generate random data with faker
             'type'=> $this->faker->name(),
             'name'=> $this->faker->City(),
-            'description' => $this->faker->Paragraph()
+            'description' => $this->faker->Paragraph(),
+            'startDate' => $this->faker->date(),
+            'endDate' => $this->faker->date(),
         ];
     }
 }

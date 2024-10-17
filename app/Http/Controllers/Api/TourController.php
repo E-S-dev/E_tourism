@@ -50,8 +50,10 @@ class TourController extends Controller
             'programme_id' => 'required|exists:programmes,id',
             'photo' => 'image|mimes:png,jpg|max:2048',
             'price' => 'required|numeric|between:0,9999.99',
-            'date' => 'required|date_format:Y-m-d',
+            'startDate' => 'required|date_format:Y-m-d',
+            'endDate' => 'required|date_format:Y-m-d',
             'number' => 'required|unique:tours,number|between:0,6',
+            'description' => 'required|max:255',
         ],[
             //messages for Errores...............................
 
@@ -83,7 +85,8 @@ class TourController extends Controller
         $tour->driver_id = $driver->id;
         $tour->programme_id = $programme->id;
         $tour->price = $request->price;
-        $tour->date = $request->date;
+        $tour->startDate = $request->startDate;
+        $tour->endDate = $request->endDate;
         $tour->number = $request->number;
         $tour->description = $request->description;
 
@@ -105,8 +108,10 @@ class TourController extends Controller
             'programme_id' => 'required|exists:programmes,id',
             'photo' => 'image|mimes:png,jpg|max:2048',
             'price' => 'required|numeric|between:0,9999.99',
-            'date' => 'required|date_format:Y-m-d',
+            'startDate' => 'required|date_format:Y-m-d',
+            'endDate' => 'required|date_format:Y-m-d',
             'number' => 'required|between:0,6',
+            'description' => 'required|max:255',
         ],[
             //messages for Errores...............................
 
@@ -144,7 +149,8 @@ class TourController extends Controller
         $tour->programme_id = $request->programme_id;
         $tour->price = $request->price;
         $tour->status = $request->status;
-        $tour->date = $request->date;
+        $tour->startDate = $request->startDate;
+        $tour->endDate = $request->endDate;
         $tour->number = $request->number;
         $tour->description = $request->description;
 

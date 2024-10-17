@@ -35,6 +35,8 @@ class ProgrammeController extends Controller
         $validator = Validator::make($request ->all(),[
             'type' => 'required|string|max:255',
             'name' => 'required|string|max:255',
+            'startDate' => 'required|date_format:Y-m-d',
+            'endDate' => 'required|date_format:Y-m-d',
         ]);
 
         if($validator->fails()){
@@ -47,6 +49,8 @@ class ProgrammeController extends Controller
         $programme->type = $request->type;
         $programme->name = $request->name;
         $programme->description = $request->description;
+        $tour->startDate = $request->startDate;
+        $tour->endDate = $request->endDate;
 
         $programme->save();
 
@@ -64,6 +68,8 @@ class ProgrammeController extends Controller
         $validator = Validator::make($request ->all(),[
             'type' => 'required|string|max:255',
             'name' => 'required|string|max:255',
+            'startDate' => 'required|date_format:Y-m-d',
+            'endDate' => 'required|date_format:Y-m-d',
         ]);
 
         if($validator->fails()){
@@ -79,6 +85,8 @@ class ProgrammeController extends Controller
         $programme->type = $request->type;
         $programme->name = $request->name;
         $programme->description = $request->description;
+        $tour->startDate = $request->startDate;
+        $tour->endDate = $request->endDate;
 
         $programme->save();
 
