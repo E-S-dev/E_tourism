@@ -150,6 +150,7 @@ class TourController extends Controller
         $tour->price = $request->price;
         $tour->status = $request->status;
         $tour->startDate = $request->startDate;
+        $tour->endDate = $request->endDate;
         $tour->description = $request->description;
 
         $tour->save();
