@@ -109,4 +109,24 @@ class ProgrammeController extends Controller
 
         return response()->json(['message' => 'Programme deleted successfully.']);
     }
+
+    function getAvailableProgramme(Request $request){
+
+        $date = $request->date;
+
+        $programmes = Programme::where('startDate', $date)->whereHas('tours', function($query){
+            $query->where('status','open');
+        })->get();
+
+        if($programmes->isEmpty()){
+            return response()->json([
+                'message' => 'No available programmes found for the specified date!'
+            ]);
+        }
+
+        return response()->json([
+            'programmes' => $programmes
+        ]);
+
+    }
 }

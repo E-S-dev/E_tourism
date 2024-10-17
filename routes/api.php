@@ -70,7 +70,8 @@ Route::middleware(['admin'])->group(function(){
     Route::put('update-programme/{id}', [ProgrammeController::class, 'updateProgramme']);
     Route::delete('delete-programme/{id}', [ProgrammeController::class, 'destroyProgramme']);
 
-    Route::post('tour-count', [DriverController::class, 'getToursforDriver']);
+    Route::post('count-tour-drivers', [DriverController::class, 'getToursforDriver']);
+    Route::post('available-programme', [ProgrammeController::class, 'getAvailableProgramme']);
 });
 
 Route::middleware(['apiAuth'])->post('apply-for-tour/{tour_id}', [TouristController::class, 'applyForTour']);

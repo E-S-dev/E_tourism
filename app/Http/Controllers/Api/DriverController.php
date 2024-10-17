@@ -115,6 +115,16 @@ class DriverController extends Controller
         $startDate = $request->startDate;
         $endDate = $request->endDate;
 
+        $drivers = Driver::withCount(['tours' => function($query) use ($startDate, $endDate){
 
+            $query->whereBetween('startDate', [$startDate, $endDate])
+                ->whereIn('status', ['open', 'closed']);
+
+        }])->get()->makeHidden(['plateNumber','description','created_at', 'updated_at']);
+
+        return response()->json([
+            'drivers' => $drivers,
+
+        ]);
     }
 }
