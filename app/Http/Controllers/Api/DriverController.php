@@ -109,4 +109,12 @@ class DriverController extends Controller
 
         return response()->json(['message' => 'Driver deleted successfully.']);
     }
+
+    function getToursforDriver(Request $request){
+
+        $startDate = $request->startDate;
+        $endDate = $request->endDate;
+
+
+    }
 }
