@@ -37,7 +37,7 @@ class ProgrammeController extends Controller
             'name' => 'required|string|max:255',
             'startDate' => 'required|date_format:Y-m-d',
             'endDate' => 'required|date_format:Y-m-d',
-            'description' => 'required|min:15',
+            'description' => 'required|min:15|max:255',
         ]);
 
         if($validator->fails()){
@@ -71,7 +71,7 @@ class ProgrammeController extends Controller
             'name' => 'required|string|max:255',
             'startDate' => 'required|date_format:Y-m-d',
             'endDate' => 'required|date_format:Y-m-d',
-             'description' => 'required|min:15',
+             'description' => 'required|min:15|max:255',
         ]);
 
         if($validator->fails()){
