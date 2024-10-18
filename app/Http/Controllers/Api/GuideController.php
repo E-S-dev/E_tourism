@@ -37,6 +37,7 @@ class GuideController extends Controller
             'lName' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'mobile' => 'required|min:10|max:15',
+            'description' => 'required|min:15',
         ]);
 
         if($validator->fails()){
@@ -70,6 +71,7 @@ class GuideController extends Controller
             'lName' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'mobile' => 'required|min:10|max:15',
+              'description' => 'required|min:15',
         ]);
 
         if($validator->fails()){
