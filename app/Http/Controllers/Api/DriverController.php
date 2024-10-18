@@ -36,7 +36,7 @@ class DriverController extends Controller
             'fName' => 'required|string|max:255',
             'lName' => 'required|string|max:255',
             'phoneNumber' => 'required|unique:drivers|min:10|max:15',
-            'plateNumber' => 'required|min:5|max:10',
+            'plateNumber' => 'required|unique:drivers|min:5|max:10',
         ]);
 
         if($validator->fails()){
@@ -69,7 +69,7 @@ class DriverController extends Controller
             'fName' => 'required|string|max:255',
             'lName' => 'required|string|max:255',
             'phoneNumber' => 'required|min:10|max:15',
-            'plateNumber' => 'required|min:5|max:10',
+            'plateNumber' => 'required|unique:drivers|min:5|max:10',
         ]);
 
         if($validator->fails()){

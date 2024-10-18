@@ -180,7 +180,8 @@ class TourController extends Controller
         if(!$searchTerm){
             return response()->json(['message' => 'Please enter a keyword!'], 400);
         }
-        $tours = Tour::where('description', 'like', '%' . $searchTerm . '%')->where('status', 'open');
+
+        $tours = Tour::where('description', 'like', '%' . $searchTerm . '%')->where('status', 'open')->get();
 
         if($tours->isEmpty()){
             return response()->json([

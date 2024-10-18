@@ -116,7 +116,9 @@ class ProgrammeController extends Controller
 
         $date = $request->date;
 
-        $programmes = Programme::where('startDate', $date)->whereHas('tours', function($query){
+        $programmes = Programme::where('startDate', $date)->with('tours', function($query){
+            $query->where('status','open');
+        })->withCount('tours', function($query){
             $query->where('status','open');
         })->get();
 
