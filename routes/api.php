@@ -71,9 +71,9 @@ Route::middleware(['admin'])->group(function(){
     Route::delete('delete-programme/{id}', [ProgrammeController::class, 'destroyProgramme']);
 
     Route::post('count-tour-drivers', [DriverController::class, 'getToursforDriver']);
-    Route::post('available-programme', [ProgrammeController::class, 'getAvailableProgramme']);
 });
 
 Route::middleware(['apiAuth'])->post('apply-for-tour/{tour_id}', [TouristController::class, 'applyForTour']);
+Route::middleware(['apiAuth'])->post('available-programme', [ProgrammeController::class, 'getAvailableProgramme']);
 
 Route::middleware(['apiAuth'])->post('logout', [AuthController::class, 'logout']);
