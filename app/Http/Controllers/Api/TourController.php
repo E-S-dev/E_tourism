@@ -52,7 +52,6 @@ class TourController extends Controller
             'price' => 'required|numeric|between:0,9999.99',
             'startDate' => 'required|date_format:Y-m-d',
             'endDate' => 'required|date_format:Y-m-d',
-            'number' => 'required|unique:tours,number|between:0,6',
             'description' => 'required|max:255',
         ],[
             //messages for Errores...............................
@@ -60,7 +59,6 @@ class TourController extends Controller
             'guide_id.exists' => 'Guide not found.',
             'driver_id.exists' => 'Driver not found.',
             'programme_id.exists' => 'Programme not found.',
-            'number.unique' => 'Namber already exists.',
             'date.date_format' => 'Please write the date in this format "YYYY-MM-DD.'
 
         ]);
@@ -87,7 +85,6 @@ class TourController extends Controller
         $tour->price = $request->price;
         $tour->startDate = $request->startDate;
         $tour->endDate = $request->endDate;
-        $tour->number = $request->number;
         $tour->description = $request->description;
 
         $tour->save();
@@ -110,7 +107,6 @@ class TourController extends Controller
             'price' => 'required|numeric|between:0,9999.99',
             'startDate' => 'required|date_format:Y-m-d',
             'endDate' => 'required|date_format:Y-m-d',
-            'number' => 'required|between:0,6',
             'description' => 'required|max:255',
         ],[
             //messages for Errores...............................
