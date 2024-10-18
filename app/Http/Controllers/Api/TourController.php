@@ -52,7 +52,7 @@ class TourController extends Controller
             'price' => 'required|numeric|between:0,9999.99',
             'startDate' => 'required|date_format:Y-m-d',
             'endDate' => 'required|date_format:Y-m-d',
-            'description' => 'required|max:255',
+            'description' => 'required|max:255|min:15',
         ],[
             //messages for Errores...............................
 
@@ -107,7 +107,7 @@ class TourController extends Controller
             'price' => 'required|numeric|between:0,9999.99',
             'startDate' => 'required|date_format:Y-m-d',
             'endDate' => 'required|date_format:Y-m-d',
-            'description' => 'required|min:15',
+            'description' => 'required|min:15|max:255',
         ],[
             //messages for Errores...............................
 
