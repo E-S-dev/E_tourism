@@ -75,5 +75,6 @@ Route::middleware(['admin'])->group(function(){
 
 Route::middleware(['apiAuth'])->post('apply-for-tour/{tour_id}', [TouristController::class, 'applyForTour']);
 Route::middleware(['apiAuth'])->post('available-programme', [ProgrammeController::class, 'getAvailableProgramme']);
+Route::middleware(['apiAuth'])->get('my-tours/{id}', [TouristController::class, 'getMyTour']);
 
 Route::middleware(['apiAuth'])->post('logout', [AuthController::class, 'logout']);

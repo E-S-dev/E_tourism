@@ -110,6 +110,8 @@ class DriverController extends Controller
         return response()->json(['message' => 'Driver deleted successfully.']);
     }
 
+//GET TOURS FOR DRIVERS-----------------------------------------------------------------------------------
+
     function getToursforDriver(Request $request){
 
         $startDate = $request->startDate;
@@ -120,7 +122,7 @@ class DriverController extends Controller
             $query->whereBetween('startDate', [$startDate, $endDate])
                 ->whereIn('status', ['open', 'closed']);
 
-        }])->get()->makeHidden(['plateNumber','description','created_at', 'updated_at']);
+        }])->get()->makeHidden(['description','created_at', 'updated_at']);
 
         return response()->json([
             'drivers' => $drivers,

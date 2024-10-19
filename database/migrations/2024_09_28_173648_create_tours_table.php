@@ -23,7 +23,7 @@ return new class extends Migration
             $table->enum('status', ['open', 'closed', 'pending'])->default('pending');
             $table->date('startDate');
             $table->date('endDate');
-            $table->unsignedInteger('number')->default(0);
+            $table->unsignedInteger('number');
             $table->longText('description');
             $table->timestamps();
         });

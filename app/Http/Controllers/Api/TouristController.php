@@ -10,7 +10,8 @@ use App\Http\Requests\UpdateTouristRequest;
 
 class TouristController extends Controller
 {
-    //GET ALL TOURISTS FUNCTION----------------------------------------------------------------------------
+
+//GET ALL TOURISTS FUNCTION----------------------------------------------------------------------------
 
     function getTourists(Tourist $tourists){
 
@@ -18,11 +19,19 @@ class TouristController extends Controller
 
     }
 
+//APPLAY FOR TOURS-------------------------------------------------------------------------------------
+
     function applyForTour($tour_id){
 
         $tour = Tour::find($tour_id);
         if (!$tour) {
             return response()->json(['message' => 'Tour not found!'], 404);
+        }
+
+        if($tour->status == 'closed'){
+            return response()->json([
+                'message' => 'You can not applay for this tour, it is closed!'
+            ]);
         }
 
         $user = auth()->user();
@@ -39,7 +48,13 @@ class TouristController extends Controller
         $tourist->tour_id = $tour->id;
         $tourist->save();
 
-        $tour->number += 1;
+        $tour->number -= 1;
+
+        if($tour->number == 0){
+            $tour->status = 'closed';
+            $tour->save();
+        }
+
         $tour->save();
 
         return response()->json([
@@ -47,5 +62,30 @@ class TouristController extends Controller
             'tourist' => $tourist,
             'tour' => $tour,
         ],200);
+    }
+
+
+//GET TOURIST'S TOUR------------------------------------------------------------------------------------
+    function getMyTour($id){
+
+        $tourist = Tourist::find($id);
+
+        if(!$tourist){
+            return response()->json([
+                'message' => 'your are not a tourists'
+            ]);
+        }
+
+        $tour = Tour::find($tourist->tour_id);
+
+        if(!$tour){
+            return response()->json([
+                'message' => 'you dont have any tour!'
+            ]);
+        }
+
+        return response()->json([
+            'tours' => $tour
+        ]);
     }
 }

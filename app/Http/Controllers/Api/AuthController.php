@@ -111,6 +111,8 @@ class AuthController extends Controller
 
     }
 
+//LOGIUT FUNCTION-----------------------------------------------------------------------------------------
+
     function logout(Request $request){
         try{
             JWTAuth::invalidate(JWTAuth::getToken());
