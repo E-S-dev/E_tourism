@@ -21,8 +21,8 @@ class ProgrammeFactory extends Factory
             'type'=> $this->faker->name(),
             'name'=> $this->faker->City(),
             'description' => $this->faker->Paragraph(),
-            'startDate' => $this->faker->date(),
-            'endDate' => $this->faker->date(),
+            'startDate' => $this->faker->dateTimeBetween('2020-01-01', '2024-12-31')->format('Y-m-d'),
+            'endDate' => $this->faker->dateTimeBetween('2020-01-01', '2024-12-31')->format('Y-m-d'),
         ];
     }
 }

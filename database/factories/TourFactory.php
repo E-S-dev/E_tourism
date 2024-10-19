@@ -24,8 +24,9 @@ class TourFactory extends Factory
             'guide_id' => Guide::factory(),
             'driver_id' => Driver::factory(),
             'programme_id' => Programme::factory(),
-            'startDate' => $this->faker->date(),
-            'endDate' => $this->faker->date(),
+            'startDate' => $this->faker->dateTimeBetween('2020-01-01', '2024-12-31')->format('Y-m-d'),
+            'endDate' => $this->faker->dateTimeBetween('2020-01-01', '2024-12-31')->format('Y-m-d'),
+            'number' => $this->faker->numberBetween(0, 10),
             'price' => $this->faker->randomFloat(1, 20, 30),
             'description' => $this->faker->Paragraph(),
         ];
