@@ -25,12 +25,12 @@ class TouristController extends Controller
 
         $tour = Tour::find($tour_id);
         if (!$tour) {
-            return response()->json(['message' => 'Tour not found!'], 404);
+            return response()->json(['message' => 'الرحلة غير موجودة'], 404);
         }
 
         if($tour->status == 'closed'){
             return response()->json([
-                'message' => 'You can not applay for this tour, it is closed!'
+                'message' => 'لا يمكنك التسجيل على هذه الرحلة! انها مغلقة!'
             ]);
         }
 
@@ -38,11 +38,11 @@ class TouristController extends Controller
         $tourist = Tourist::where('id', $user->tourist_id)->first();
 
         if(!$tourist){
-            return response()->json(['message' => 'Tourist not found!'], 404);
+            return response()->json(['message' => 'السائح غير موجود'], 404);
         }
 
         if($tourist->tour_id == $tour->id){
-            return response()->json(['message' => 'You are already registerd for this Tour!'], 400);
+            return response()->json(['message' => 'لقد سجلت على هذه الرحلة بالفعل!'], 400);
         }
 
         $tourist->tour_id = $tour->id;
@@ -58,7 +58,7 @@ class TouristController extends Controller
         $tour->save();
 
         return response()->json([
-            'message' => 'You have regesterd for this tour suucessfully.',
+            'message' => 'لقد تم تسجيلك في هذه الرحلة بنجاح',
             'tourist' => $tourist,
             'tour' => $tour,
         ],200);
@@ -72,7 +72,7 @@ class TouristController extends Controller
 
         if(!$tourist){
             return response()->json([
-                'message' => 'your are not a tourists'
+                'message' => 'لم يتم العثور على المستخدم!'
             ]);
         }
 
@@ -80,7 +80,7 @@ class TouristController extends Controller
 
         if(!$tour){
             return response()->json([
-                'message' => 'you dont have any tour!'
+                'message' => 'ليس لديك اية رحلات مسجلة!'
             ]);
         }
 

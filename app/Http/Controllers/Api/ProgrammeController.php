@@ -20,7 +20,7 @@ class ProgrammeController extends Controller
         $programme = Programme::find($id);
         if(!$programme){
             return response()->json([
-                'message' => 'Programme not found!'
+                'message' => 'البرنامج غير موجود!'
             ]);
         }
         return response()->json([
@@ -38,6 +38,16 @@ class ProgrammeController extends Controller
             'startDate' => 'required|date_format:Y-m-d',
             'endDate' => 'required|date_format:Y-m-d',
             'description' => 'required|min:15|max:255',
+        ],
+        [
+        'type.required' => 'حقل النوع مطلوب',
+        'name.required' => 'حقل الاسم مطلوب',
+        'startDate.required' => 'حقل تاريخ البدء مطلوب',
+        'endDate.required' => 'حقل تاريخ الانتهاء مطلوب',
+        'startDate.date_format' => 'يكون ان يكون التاريخ بالصيغة yy-mm-dd.',
+        'endDate.date_format' => 'يكون ان يكون التاريخ بالصيغة yy-mm-dd.',
+        'description.required' => 'الوصف مطلوب',
+        'description.min' => 'يجب أن يكون الوصف 15 رقم كحد ادنى.',
         ]);
 
         if($validator->fails()){
@@ -56,7 +66,7 @@ class ProgrammeController extends Controller
         $programme->save();
 
         return response()->json([
-            'message' => 'Programme added successfully.',
+            'message' => 'تم اضافة البرنامج بنجاح',
             'programme' => $programme,
         ], 201);
 
@@ -72,6 +82,16 @@ class ProgrammeController extends Controller
             'startDate' => 'required|date_format:Y-m-d',
             'endDate' => 'required|date_format:Y-m-d',
             'description' => 'required|min:15|max:255',
+        ],
+        [
+        'type.required' => 'حقل النوع مطلوب',
+        'name.required' => 'حقل الاسم مطلوب',
+        'startDate.required' => 'حقل تاريخ البدء مطلوب',
+        'endDate.required' => 'حقل تاريخ الانتهاء مطلوب',
+        'startDate.date_format' => 'يجب ان يكون التاريخ بالصيغة yy-mm-dd.',
+        'endDate.date_format' => 'يجب ان يكون التاريخ بالصيغة yy-mm-dd.',
+        'description.required' => 'الوصف مطلوب',
+        'description.min' => 'يجب أن يكون الوصف 15 محرف كحد ادنى.',
         ]);
 
         if($validator->fails()){
@@ -82,7 +102,7 @@ class ProgrammeController extends Controller
 
         $programme = Programme::find($id);
 
-        if(!$programme){return response()->json(['message' => 'Programme not found!']);}
+        if(!$programme){return response()->json(['message' => 'البرنامج غير موجود!']);}
 
         $programme->type = $request->type;
         $programme->name = $request->name;
@@ -93,7 +113,7 @@ class ProgrammeController extends Controller
         $programme->save();
 
         return response()->json([
-            'message' => 'Programme updated successfully.',
+            'message' => 'تم تعديل البرنامج بنجاح!',
             'programme' => $programme,
         ], 201);
 
@@ -105,11 +125,11 @@ class ProgrammeController extends Controller
 
         $programme = Programme::find($id);
 
-        if(!$programme){return response()->json(['message' => 'Programme not found!']);}
+        if(!$programme){return response()->json(['message' => 'البرنامج غير موجود']);}
 
         $programme->delete();
 
-        return response()->json(['message' => 'Programme deleted successfully.']);
+        return response()->json(['message' => 'تم حذف البرنامج بنجاح.']);
     }
 
 //GET AVAILABLE PROGRAMMES----------------------------------------------------------------------------------
@@ -118,7 +138,7 @@ class ProgrammeController extends Controller
 
         $date = $request->date;
 
-        $programmes = Programme::where('startDate', $date)->whereHas('tours', function($query){
+        $programmes = Programme::where('startDate','<=', $date)->where('endDate','>=', $date)->whereHas('tours', function($query){
             $query->where('status','open');})
 
         ->with(['tours' => function($query){
@@ -130,7 +150,7 @@ class ProgrammeController extends Controller
 
         if($programmes->isEmpty()){
             return response()->json([
-                'message' => 'No available programmes found for the specified date!'
+                'message' => 'لا توجد برامج متاحة خلال الفترة الزمنية المحددة'
             ]);
         }
 

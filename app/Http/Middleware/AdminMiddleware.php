@@ -22,7 +22,7 @@ class AdminMiddleware
         }
 
         return response()->json([
-            'message' => 'Access Denied'
+            'message' => 'لا يمكنك الوصول لهذا الطلب'
         ],401);
     }
 }

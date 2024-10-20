@@ -32,7 +32,7 @@ class TourController extends Controller
         $tour = Tour::find($id);
         if(!$tour){
             return response()->json([
-                'message' => 'Tour not found!'
+                'message' => 'الرحلة غير موجودة!'
             ]);
         }
         return response()->json([
@@ -57,10 +57,20 @@ class TourController extends Controller
         ],[
             //messages for Errores...............................
 
-            'guide_id.exists' => 'Guide not found.',
-            'driver_id.exists' => 'Driver not found.',
-            'programme_id.exists' => 'Programme not found.',
-            'date.date_format' => 'Please write the date in this format "YYYY-MM-DD.'
+            'guide_id.required' => 'رجاء اختر مرشد',
+            'driver_id.required' => 'رجاء اختر سائق',
+            'programme_id.required' => 'رجاء اختر برنامج',
+            'guide_id.exists' => 'المرشد غير موجود!',
+            'driver_id.exists' => 'السائق غير موجود!',
+            'programme_id.exists' => 'البرنامج غير موجود!',
+            'photo.mimes' => 'يجب ان يكون نوع الصورة jpg او png',
+            'photo.max' => 'يجب ان يكون الحجم الاقصى للصورة 2048px',
+            'price.required' => 'حقل السعر مطلوب!',
+            'startDate.date_format' => 'يجب ان يكون التاريخ بالصيغة yy-mm-dd.',
+            'endDate.date_format' => 'يجب ان يكون التاريخ بالصيغة yy-mm-dd.',
+            'number.required' => 'ادخل عدد السياح المطلوب!',
+            'number.between' => 'يجب أن يكون الرقم بين 1 و 100 رقم.',
+            'description.min' => 'يجب أن يكون الوصف 15 محرف كحد ادنى.',
 
         ]);
 
@@ -92,7 +102,7 @@ class TourController extends Controller
         $tour->save();
         $tour->refresh();
         return response()->json([
-            'message' => 'Tour added successfully.',
+            'message' => 'تم اضافة الرحلة بنجاح!',
             'tour' => $tour,
         ],201);
     }
@@ -100,6 +110,14 @@ class TourController extends Controller
 //Update Tour Function------------------------------------------------------------------------
 
     function updateTour(Request $request, $id){
+
+        $tour = Tour::find($id);
+
+        if(!$tour){
+            return response()->json([
+                'message' => 'الرحلة غير موجودة!'
+            ]);
+        }
 
         $validator = Validator::make($request->all(),[
             'guide_id' => 'required|exists:guides,id',
@@ -114,28 +132,26 @@ class TourController extends Controller
         ],[
             //messages for Errores...............................
 
-            'guide_id.required' => 'Please select a guide.',
-            'driver_id.required' => 'Please select a driver.',
-            'programme_id.required' => 'Please select a programme.',
-            'guide_id.exists' => 'Guide not found.',
-            'driver_id.exists' => 'Driver not found.',
-            'programme_id.exists' => 'Programme not found.',
-            'date.date_format' => 'Please write the date in this format "YYYY-MM-DD.'
+            'guide_id.required' => 'رجاء اختر مرشد',
+            'driver_id.required' => 'رجاء اختر سائق',
+            'programme_id.required' => 'رجاء اختر برنامج',
+            'guide_id.exists' => 'المرشد غير موجود!',
+            'driver_id.exists' => 'السائق غير موجود!',
+            'programme_id.exists' => 'البرنامج غير موجود!',
+            'photo.mimes' => 'يجب ان يكون نوع الصورة jpg او png',
+            'photo.max' => 'يجب ان يكون الحجم الاقصى للصورة 2048px',
+            'price.required' => 'حقل السعر مطلوب!',
+            'startDate.date_format' => 'يجب ان يكون التاريخ بالصيغة yy-mm-dd.',
+            'endDate.date_format' => 'يجب ان يكون التاريخ بالصيغة yy-mm-dd.',
+            'number.required' => 'ادخل عدد السياح المطلوب!',
+            'number.between' => 'يجب أن يكون الرقم بين 1 و 100 رقم.',
+            'description.min' => 'يجب أن يكون الوصف 15 محرف كحد ادنى.',
 
         ]);
-
         if($validator->fails()){
             return response()->json([
                 'message' => $validator->errors()->first()
             ], 401);
-        }
-
-        $tour = Tour::find($id);
-
-        if(!$tour){
-            return response()->json([
-                'message' => 'Tour not found!'
-            ]);
         }
 
         if($request->hasFile('photo')){
@@ -157,7 +173,7 @@ class TourController extends Controller
         $tour->refresh();
 
         return response()->json([
-            'message' => 'Tour updated successfully.',
+            'message' => 'تم تعديل الرحلة بنجاح.',
             'tour' => $tour,
         ]);
 
@@ -169,12 +185,12 @@ class TourController extends Controller
 
         $tour = Tour::find($id);
 
-        if(!$tour){return response()->json(['message' => 'Tour Not Found!.']);}
+        if(!$tour){return response()->json(['message' => 'الرحلة غير موجودة!']);}
 
         $tour->delete();
 
         return response()->json([
-            'message' => 'Tour Deleted Successfully!'
+            'message' => 'تم حذف الرحلة بنجاح!'
         ]);
     }
 
@@ -182,14 +198,14 @@ class TourController extends Controller
 
         $searchTerm = $request->keyword;
         if(!$searchTerm){
-            return response()->json(['message' => 'Please enter a keyword!'], 400);
+            return response()->json(['message' => 'الرجاء ادخال كلمة مفتاحية للبحث.'], 400);
         }
 
         $tours = Tour::where('description', 'like', '%' . $searchTerm . '%')->where('status', 'open')->get();
 
         if($tours->isEmpty()){
             return response()->json([
-                'message' => 'Nothing Found!'
+                'message' => 'لم يتم العثور على اية نتائج مطابقة للبحث!'
             ]);
         }
         return response()->json([

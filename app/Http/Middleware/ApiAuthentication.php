@@ -20,6 +20,6 @@ class ApiAuthentication
             return $next($request);
         }
 
-        return response()->json(['message' => 'You have to login first!'],401);
+        return response()->json(['message' => 'يجب عليك تسجيل الدخول اولا!'],401);
     }
 }

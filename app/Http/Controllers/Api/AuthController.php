@@ -19,6 +19,13 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(),[
             'email' => 'required|email',
             'password' => 'required|string'
+        ],[
+            //messages for Errores...............................
+
+            'email.required' => 'حقل الايميل مطلوب',
+            'passowrd.required' => 'حقل كلمة المرور مطلوب',
+            'email.email' => 'ادخل ايميل صالح!'
+
         ]);
 
         if($validator->fails()){
@@ -50,9 +57,26 @@ class AuthController extends Controller
         $validator = Validator::make($request ->all(),[
             'fName' => 'required|string|between:5,50',
             'lName' => 'required|string|between:5,50',
-            'phoneNumber' => 'min:10|max:15',
+            'phoneNumber' => 'required|unique:tourists|min:10|max:15',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|confirmed|min:6'
+        ],[
+            //messages for Errores...............................
+
+            'fName.required' => 'حقل الاسم الاول مطلوب',
+            'fName.between' => 'يجب أن يكون الاسم بين 5 و 50 حرفًا.',
+            'lName.required' => 'حقل الاسم الاخير مطلوب',
+            'lName.between' => 'يجب أن يكون الاسم بين 5 و 50 حرفًا.',
+            'phoneNumber.required' => 'رقم الهاتف مطلوب',
+            'phoneNumber.unique' => 'رقم الهاتف موجود بالفعل موجود بالفعل!',
+            'phoneNumber.min' => 'يجب أن يكون رقم الهاتف 10 ارقام كحد ادنى.',
+            'phoneNumber.max' => 'يجب أن يكون رقم الهاتف 15 رقم كحد اقصى.',
+            'email.required' => 'حقل الايميل مطلوب',
+            'email.email' => 'ادخل ايميل صالح!',
+            'email.unique' => 'الايميل موجود بالفعل!',
+            'passowrd.required' => 'حقل كلمة المرور مطلوب',
+            'passowrd.confirmed' => 'يجب تاكيد كلمة المرور',
+            'passowrd.min' => 'يجب ان تكون كلمة المرور اكثر من 6 محارف',
         ]);
 
         if($validator->fails()){
@@ -87,6 +111,14 @@ class AuthController extends Controller
         $validator = Validator::make($request ->all(),[
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|min:6'
+        ],
+        [
+            'email.required' => 'حقل الايميل مطلوب',
+            'email.email' => 'ادخل ايميل صالح!',
+            'email.unique' => 'الايميل موجود بالفعل!',
+            'passowrd.required' => 'حقل كلمة المرور مطلوب',
+            'passowrd.confirmed' => 'يجب تاكيد كلمة المرور',
+            'passowrd.min' => 'يجب ان تكون كلمة المرور اكثر من 6 محارف',
         ]);
 
         if($validator->fails()){

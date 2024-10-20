@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('fName');
             $table->string('lName');
             $table->string('plateNumber');
-            $table->string('phoneNumber')->unique();
+            $table->string('phoneNumber');
             $table->longText('description')->nullable();
             $table->timestamps();
         });

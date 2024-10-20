@@ -21,7 +21,7 @@ class GuideController extends Controller
         $guide = Guide::find($id);
         if(!$guide){
             return response()->json([
-                'message' => 'Guide not found!'
+                'message' => 'المرشد غير موجود!'
             ]);
         }
         return response()->json([
@@ -36,8 +36,19 @@ class GuideController extends Controller
             'fName' => 'required|string|max:255',
             'lName' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'mobile' => 'required|min:10|max:15',
+            'mobile' => 'required|unique:guides|min:10|max:15',
             'description' => 'required|min:15|max:255',
+        ],
+        [
+        'fName.required' => 'حقل الاسم الاول مطلوب',
+        'lName.required' => 'حقل الاسم الاخير مطلوب',
+        'address.required' => 'حقل العنوان مطلوب',
+        'mobile.required' => 'رقم الهاتف مطلوب',
+        'mobile.unique' => 'رقم الهاتف موجود بالفعل موجود بالفعل!',
+        'mobile.min' => 'يجب أن يكون رقم الهاتف 10 ارقام كحد ادنى.',
+        'mobile.max' => 'يجب أن يكون رقم الهاتف 15 رقم كحد اقصى.',
+        'description.required' => 'الوصف مطلوب',
+        'description.min' => 'يجب أن يكون الوصف 15 رقم كحد ادنى.',
         ]);
 
         if($validator->fails()){
@@ -72,6 +83,16 @@ class GuideController extends Controller
             'address' => 'required|string|max:255',
             'mobile' => 'required|min:10|max:15',
             'description' => 'required|min:15|max:255',
+        ],
+        [
+        'fName.required' => 'حقل الاسم الاول مطلوب',
+        'lName.required' => 'حقل الاسم الاخير مطلوب',
+        'address.required' => 'حقل العنوان مطلوب',
+        'mobile.required' => 'رقم الهاتف مطلوب',
+        'mobile.min' => 'يجب أن يكون رقم الهاتف 10 ارقام كحد ادنى.',
+        'mobile.max' => 'يجب أن يكون رقم الهاتف 15 رقم كحد اقصى.',
+        'description.required' => 'الوصف مطلوب',
+        'description.min' => 'يجب أن يكون الوصف 15 رقم كحد ادنى.',
         ]);
 
         if($validator->fails()){
@@ -82,7 +103,7 @@ class GuideController extends Controller
 
         $guide = Guide::find($id);
 
-        if(!$guide){return response->json(['message' => 'Guide not found!']);}
+        if(!$guide){return response->json(['message' => 'المرشد غير موجود!']);}
 
         $guide->fName = $request->fName;
         $guide->lName = $request->lName;
@@ -93,7 +114,7 @@ class GuideController extends Controller
         $guide->save();
 
         return response()->json([
-            'message' => 'Guide updated successfully.',
+            'message' => 'تم تعديل المرشد بنجاح!',
             'guide' => $guide,
         ], 201);
 
@@ -105,10 +126,10 @@ class GuideController extends Controller
 
         $guide = Guide::find($id);
 
-        if(!$guide){return response()->json(['message' => 'Guide not found!']);}
+        if(!$guide){return response()->json(['message' => 'المرشد غير موجود!']);}
 
         $guide->delete();
 
-        return response()->json(['message' => 'Guide deleted successfully.']);
+        return response()->json(['message' => 'تم حذف المرشد بنجاح!']);
     }
 }
