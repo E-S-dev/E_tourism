@@ -31,11 +31,10 @@ class AuthController extends Controller
 
             if(!$token = auth()->attempt($credentials)){
                 return response()->json([
-                    'message' => "Unauthorized user! please check your credentials."], 401);
+                    'message' => "المستخدم غير موجود الرجاء التحقق من المعلومات المدخلة!"], 401);
             }
 
             $user = $request->user();
-            // $token = $user->createToken(request()->userAgent())->plainTextToken;
 
             return response()->json([
                 'token' => $token,
@@ -75,7 +74,7 @@ class AuthController extends Controller
         $token = JWTAuth::fromUser($user);
 
         return response()->json([
-            'message' => 'Registerd Successfully',
+            'message' => 'تم التسجيل بنجاح',
             'token' => $token,
             'user' => $user,
             'role' => $user->getRoleNames()->first()
@@ -103,7 +102,7 @@ class AuthController extends Controller
         $token = JWTAuth::fromUser($user);
 
         return response()->json([
-            'message' => 'Registerd Successfully',
+            'message' => 'تم التسجيل بنجاح',
             'token' => $token,
             'user' => $user,
             'role' => $user->getRoleNames()->first()
@@ -117,10 +116,10 @@ class AuthController extends Controller
         try{
             JWTAuth::invalidate(JWTAuth::getToken());
 
-            return response()->json(['message' => 'Successfully logged out'], 200);
+            return response()->json(['message' => 'تم تسجيل الخروج بنجاح'], 200);
         }
         catch (\Exception $e){
-            return response()->json(['error' => 'Faild to logout, please try again'], 500);
+            return response()->json(['error' => 'فشل في تسجيل الخروج, الرجاء المحاولة لاحقا!'], 500);
         }
     }
 }

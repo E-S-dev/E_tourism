@@ -20,7 +20,7 @@ class DriverController extends Controller
         $driver = Driver::find($id);
         if(!$driver){
             return response()->json([
-                'message' => 'Driver not found!'
+                'message' => 'السائق يغر موجود'
             ]);
         }
         return response()->json([
@@ -55,7 +55,7 @@ class DriverController extends Controller
         $driver->save();
 
         return response()->json([
-            'message' => 'Driver added successfully.',
+            'message' => 'تم اضافة السائق بنجاح.',
             'driver' => $driver,
         ], 201);
 
@@ -69,7 +69,7 @@ class DriverController extends Controller
             'fName' => 'required|string|max:255',
             'lName' => 'required|string|max:255',
             'phoneNumber' => 'required|min:10|max:15',
-            'plateNumber' => 'required|unique:drivers|min:5|max:10',
+            'plateNumber' => 'required|min:5|max:10',
         ]);
 
         if($validator->fails()){
@@ -80,7 +80,7 @@ class DriverController extends Controller
 
         $driver = Driver::find($id);
 
-        if(!$driver){return response->json(['message' => 'Driver not found!']);}
+        if(!$driver){return response->json(['message' => 'السائق غير موجود!']);}
 
         $driver->fName = $request->fName;
         $driver->lName = $request->lName;
@@ -91,7 +91,7 @@ class DriverController extends Controller
         $driver->save();
 
         return response()->json([
-            'message' => 'Driver updated successfully.',
+            'message' => 'تم تعديل معلومات السائق بنجاح!',
             'driver' => $driver,
         ], 201);
 
@@ -103,11 +103,11 @@ class DriverController extends Controller
 
         $driver = Driver::find($id);
 
-        if(!$driver){return response()->json(['message' => 'Driver not found!']);}
+        if(!$driver){return response()->json(['message' => 'السائق غير موجود!']);}
 
         $driver->delete();
 
-        return response()->json(['message' => 'Driver deleted successfully.']);
+        return response()->json(['message' => 'تم حذف السائق بنجاح!']);
     }
 
 //GET TOURS FOR DRIVERS-----------------------------------------------------------------------------------

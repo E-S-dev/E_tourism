@@ -28,14 +28,23 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //AUTH ROUTES-------------------------------------------------------------------------------------------------
 
 Route::post('login', [AuthController::class, 'login']);
+
 Route::post('register', [AuthController::class, 'register']);
+
 Route::post('adminRegister', [AuthController::class, 'adminRegister']);
+
 Route::get('get-open-tours', [TourController::class, 'getOpenTours']);
+
 Route::get('get-tours', [TourController::class, 'getTours']);
+
 Route::get('get-tour-detalis/{id}', [TourController::class, 'getTourDetails']);
+
 Route::get('get-guide-detalis/{id}', [GuideController::class, 'getGuideDetails']);
+
 Route::get('get-driver-detalis/{id}', [DriverController::class, 'getDriverDetails']);
+
 Route::get('get-programme-detalis/{id}', [ProgrammeController::class, 'getProgrammeDetails']);
+
 Route::post('search-tours', [TourController::class, 'searchTours']);
 
 
@@ -74,7 +83,9 @@ Route::middleware(['admin'])->group(function(){
 });
 
 Route::middleware(['apiAuth'])->post('apply-for-tour/{tour_id}', [TouristController::class, 'applyForTour']);
+
 Route::middleware(['apiAuth'])->post('available-programme', [ProgrammeController::class, 'getAvailableProgramme']);
+
 Route::middleware(['apiAuth'])->get('my-tours/{id}', [TouristController::class, 'getMyTour']);
 
 Route::middleware(['apiAuth'])->post('logout', [AuthController::class, 'logout']);
